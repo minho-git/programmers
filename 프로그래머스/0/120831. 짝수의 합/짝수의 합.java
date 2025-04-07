@@ -3,18 +3,13 @@ class Solution {
     
         int sum = 0;
         
-        if(n == 1) {
-            return 0;
-        } else {
-            for (int i = 1; i <= n; i++){
-                if(i % 2 == 0) {
+        for (int i = 2; i <= n; i+=2){
+            if(i % 2 == 0) {
                 sum += i;
-                }
-            } 
-        return sum;
-        }
-     
-
+            }
+        } 
         
-    }
+        return sum;
+        
+        }
 }
