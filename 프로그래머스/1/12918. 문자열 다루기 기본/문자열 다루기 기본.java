@@ -6,7 +6,7 @@ class Solution {
             return false;
         }
         for(char a : array) {
-            if(a < 48 || a > 57) {
+            if(a < '0' || a > '9') {
                 return false;
             }
         }
