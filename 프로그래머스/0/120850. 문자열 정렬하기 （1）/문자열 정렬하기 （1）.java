@@ -6,12 +6,12 @@ class Solution {
         List<Integer> list = new ArrayList();
         
         for(int i = 0; i < numbers.length; i++) {
-            // if(Character.isDigit(numbers[i])) {
-            //     list.add(Character.getNumericValue(numbers[i]));
-            // }
-            if(numbers[i] >= '0' && numbers[i] <= '9') {
-                list.add(numbers[i] - '0');
+            if(Character.isDigit(numbers[i])) {
+                list.add(Character.getNumericValue(numbers[i]));
             }
+            // if(numbers[i] >= '0' && numbers[i] <= '9') {
+            //     list.add(numbers[i] - '0');
+            // }
         }
         Collections.sort(list);
         int[] answer = new int[list.size()];
