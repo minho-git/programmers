@@ -5,9 +5,9 @@ class Solution {
         
         for(int i = 0; i < array.length; i++) {
             if(array[i] >= 65 && array[i] <=90) {
-                array[i] = (char)(array[i] + 32);
+                array[i] += 32;
             } else {
-                array[i] = (char)(array[i] -  32);
+                array[i] -= 32;
             }
         }
 
