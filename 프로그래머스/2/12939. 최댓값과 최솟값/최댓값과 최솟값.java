@@ -6,13 +6,7 @@ class Solution {
         
         int[] num = new int[str.length];
         for(int i = 0; i < str.length; i++) {
-            if(str[i].contains("-")) {
-                str[i] = str[i].replace("-", "");
-                num[i] =  -Integer.parseInt(str[i]);
-            } else {
-                num[i] =  Integer.parseInt(str[i]);
-            }
-            
+            num[i] =  Integer.parseInt(str[i]);
         }
         
         
