@@ -18,27 +18,8 @@ N = int(input())
 
 for i in range(N):
     num = int(input())
-    j = 0
-    min_gap = 10001
-    min_num1 = 0
-    min_num2 = 0
 
-    while True:
-
-        if primary_array[j] > num / 2:
+    for j in range(num//2, 1, -1):
+        if array[j] == 0 and array[num - j] == 0:
+            print(j, num-j)
             break
-
-
-        if array[num - primary_array[j]] == 0: # 전체에서 소수를 뺀게 소수라면
-
-            if min_gap > (num -primary_array[j]) - primary_array[j]: #
-                min_num1 = primary_array[j]
-                min_num2 = num - primary_array[j]
-                min_gap = min_num2 - min_num1
-
-
-        j += 1
-
-    print(min_num1, min_num2)
-
-
