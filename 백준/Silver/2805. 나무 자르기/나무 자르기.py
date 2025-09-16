@@ -11,7 +11,10 @@ while start <= end:
     total = 0
     mid = (start + end) // 2
 
-    total = sum(tree - mid for tree in trees if tree > mid)
+    for i in range(len(trees)):
+        diff = trees[i] - mid
+        if diff > 0:
+            total += diff
 
     if total >= M:
         answer = mid
