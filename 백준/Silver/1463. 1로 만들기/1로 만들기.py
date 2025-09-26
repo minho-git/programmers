@@ -1,31 +1,17 @@
-from collections import deque
-
 n = int(input())
 
-visited = [False for i in range(1000000 + 1)]
-queue = deque()
-queue.append((1, 0))
+D = [0 for i in range(n+1)]
 
-while True:
+for i in range(2, n+1):
 
-    value, count = queue.popleft()
 
-    if value == n:
-        print(count)
-        break
+    D[i] = D[i - 1] + 1
+    if i % 2 == 0:
+        D[i] = min(D[i], D[i // 2] + 1)
 
-    tmp = 3 * value
-    if  tmp < len(visited) and not visited[tmp]:
-        queue.append((tmp, (count + 1)))
-        visited[tmp] = True
+    if i % 3 == 0:
+        D[i] = min(D[i], D[i // 3] + 1)
 
-    tmp = 2 * value
-    if tmp < len(visited) and not visited[tmp]:
-        queue.append((tmp, (count + 1)))
-        visited[tmp] = True
 
-    tmp = 1 + value
-    if tmp < len(visited)  and not visited[tmp]:
-        queue.append((tmp, (count + 1)))
-        visited[tmp] = True
+print(D[n])
 
