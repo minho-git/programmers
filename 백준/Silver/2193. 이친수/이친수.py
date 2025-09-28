@@ -9,20 +9,34 @@
 #5  3  2
 #6  5  3
 
-n = int(input())
+# n = int(input())
+#
+# if n == 1:
+#     print(1)
+# else:
+#
+#     D = [0 for i in range(n+1)]
+#     D[1] = 1
+#     D[2] = 1
+#
+#     for i in range(2, n+1):
+#         D[i] = D[i-1] + D[i-2]
+#
+#     print(D[n])
 
-if n == 1:
-    print(1)
-else:
-    
-    D = [0 for i in range(n+1)]
-    D[1] = 1
-    D[2] = 1
+N = int(input())
 
-    for i in range(2, n+1):
-        D[i] = D[i-1] + D[i-2]
+D = [[0,0] for i in range(N+1)]
+D[1] = [0, 1]
 
-    print(D[n])
+for i in range(2, N+1):
+    D[i][1] = D[i-1][0]
+    D[i][0] = D[i-1][0] + D[i-1][1]
+
+print(D[N][0] + D[N][1])
+
+
+
 
 
 
