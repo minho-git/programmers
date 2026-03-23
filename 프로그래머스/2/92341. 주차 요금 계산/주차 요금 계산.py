@@ -1,3 +1,5 @@
+import math
+
 def solution(fees, records):
     for i in range(len(records)):
         tmp = records[i].split()
@@ -36,10 +38,7 @@ def solution(fees, records):
             cars[key] = 0
             cars[key] = fees[1]
         else:
-            if cars[key] % fees[2] == 0:
-                cars[key] = fees[1] + int(cars[key] / fees[2]) * fees[3]
-            else:
-                cars[key] = fees[1] + int((cars[key] / fees[2]) + 1) * fees[3]
+            cars[key] = fees[1] + math.ceil((cars[key] / fees[2])) * fees[3]
     
     
     array = sorted(cars)
