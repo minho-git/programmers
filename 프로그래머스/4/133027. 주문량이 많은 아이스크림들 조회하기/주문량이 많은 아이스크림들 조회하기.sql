@@ -1,0 +1,13 @@
+SELECT TT.FLAVOR
+FROM (
+    SELECT T.FLAVOR, SUM(T.TOTAL_ORDER) AS S
+    FROM
+        (SELECT *
+        FROM FIRST_HALF
+        UNION ALL
+        SELECT *
+        FROM JULY
+        ) AS T
+    GROUP BY FLAVOR
+    ORDER BY S DESC) AS TT
+LIMIT 3
