@@ -9,7 +9,6 @@ graph = []
 for i in range(N):
     graph.append(list(map(int, input())))
 
-# 일단 이동을 위한 큐가 필요하다.
 q = deque()
 q.append((0, 0, 1, 0))
 visited = [[[float("inf")] * M for _ in range(N)] for __ in range(2)]
@@ -18,6 +17,10 @@ visited[0][0][0] = 1
 
 while q:
     y, x, dist, check = q.popleft()
+
+    if y == N - 1 and x == M - 1:
+        print(dist)
+        exit()
 
     for i in range(4):
         yy = y + dy[i]
