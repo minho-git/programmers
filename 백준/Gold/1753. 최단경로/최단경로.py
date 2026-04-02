@@ -1,38 +1,38 @@
-import heapq
 import sys
+import heapq
 
-# 입력 속도 향상 (필수)
-input = sys.stdin.readline
+input = lambda : sys.stdin.readline().rstrip()
 
-V, E = map(int,input().split())
+V, E = map(int, input().split())
 K = int(input())
 
-graph = [[] for _ in range(V+1)]
-dy = [float("inf")] * (V+1)
+graph = [[] for _ in range(V+1)] # 크기가 클때 연결 리스트 사용하기!
 
 for i in range(E):
-    u, v, w = map(int, input().split())
+    u, v, w = tuple(map(int, input().split()))
     graph[u].append((v, w))
 
-def dijkstra(start):
-    q = [(0, start)] # 이거 첫 번째 요소로 정렬됨!!
-    dy[start] = 0
+distance = [float("inf")] * (V+1)
+distance[K] = 0
 
-    while q:
-        value, now = heapq.heappop(q)
+q = [(0, K)] # (가중치, 노드) # 힙에는 앞에 요소가 정렬 대상!
 
-        if dy[now] < value:
-            continue
+while q:
 
-        for next_node, weight in graph[now]:
-            if dy[next_node] > value + weight:
-                dy[next_node] = value + weight
-                heapq.heappush(q, (value + weight, next_node))
+    price, node = heapq.heappop(q)
 
-dijkstra(K)
+    if distance[node] < price: # 큐에 남아있는 비싼 쓰레기 버리기
+        continue
 
-for i in range(1, len(dy)):
-    if dy[i] == float("inf"):
+    for next_node, next_price in graph[node]:
+
+        total = price + next_price
+        if distance[next_node] > total:
+            heapq.heappush(q, (total, next_node))
+            distance[next_node] = total
+
+for i in range(1, len(distance)):
+    if distance[i] == float("inf"):
         print("INF")
     else:
-        print(dy[i])
+        print(distance[i])
