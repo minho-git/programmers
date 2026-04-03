@@ -1,17 +1,17 @@
 N = int(input())
-plan = [(0,0)]
-dp = [0 for i in range(100)]
+graph = [(0, 0)]
+dp = [0] * (N+2)
+
 
 for i in range(N):
-    t, p = map(int, input().split())
+    graph.append(tuple(map(int, input().split())))
 
-    plan.append((t, p))
 
 for i in range(1, N+1):
+    clear_day = i + graph[i][0]
 
-    dp[i + plan[i][0]] = max(dp[i + plan[i][0]], dp[i] + plan[i][1])
+    if clear_day <= N+1:
+        for j in range(clear_day, N+2):
+            dp[j] = max(dp[j], dp[i] + graph[i][1])
 
-    dp[i+1] = max(dp[i+1], dp[i])
-
-
-print(dp[N+1])
+print(max(dp))
