@@ -1,12 +1,17 @@
 def solution(nums):
 
-    N = len(nums)
+    l = len(nums) // 2
+    c = set() # 이거 왜 그냥 {}로 하면 안돼?
+    result = 0
     
-    arr = set(nums)
-    M = len(arr)
+    for num in nums:
+        if result >= l:
+            break
+        
+        if num not in c:
+            result += 1
+            c.add(num)
     
     
-    if N//2 >= M:
-        return M
-    else:
-        return N//2
+    return result
+    
