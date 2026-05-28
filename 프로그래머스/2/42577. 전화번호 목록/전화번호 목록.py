@@ -1,16 +1,30 @@
 def solution(phone_book):
-    _dict = {i : dict() for i in range(1, 21)}
+    phone_book.sort(key = lambda x:len(x))
+    phone_book.reverse()
     
-    for i in range(len(phone_book)):
-        for j in range(1, len(phone_book[i]) + 1):
-            _dict[j][(phone_book[i][:j])] = _dict[j].get((phone_book[i][:j]), 0) + 1
+    _set = set()
     
-    
-    
-    for i in range(len(phone_book)):
-        tmp = phone_book[i]
-        if _dict[len(tmp)].get(tmp, 0) > 1:
+    for phone_num in phone_book:
+        if phone_num in _set:
             return False
-            
+        
+        for i in range(1, len(phone_num)):
+            _set.add(phone_num[:i])
+        
     
     return True
+        
+        
+#     while phone_book:
+#         popped = phone_book.pop(0)
+
+#         for phone in phone_book:
+
+#             _length = len(popped)
+#             if _length > len(phone):
+#                 continue
+
+#             if popped == phone[0:_length]:
+#                 return False
+        
+#     return True
