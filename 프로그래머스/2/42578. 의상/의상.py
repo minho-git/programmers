@@ -1,12 +1,12 @@
+from collections import Counter
+
 def solution(clothes):
-    _dict= {}
+    
+    count = Counter([kind for _, kind in clothes]) # dict처럼 사용 가능
+    
     result = 1
-    
-    for cloth in clothes:
-        _dict[cloth[1]] = _dict.get(cloth[1], 0) + 1
-    
-    
-    for key, value in _dict.items(): # items 기억안남.. enurmerate랑 헷갈림
+    for value in count.values():
         result *= (value + 1)
         
+    
     return result - 1
