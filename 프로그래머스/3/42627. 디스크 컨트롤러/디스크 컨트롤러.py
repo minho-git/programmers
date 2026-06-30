@@ -2,23 +2,26 @@ import heapq
 
 def solution(jobs):
     jobs.sort()
-    i = 0
-    now = 0
-    answer = 0
     heap = []
+    answer = 0
+    time = 0
+    i = 0
     
     while i < len(jobs) or heap:
-        while i < len(jobs) and jobs[i][0] <= now:
-            tmp = [jobs[i][1], jobs[i][0], i]
+        
+        while i < len(jobs) and jobs[i][0] <= time:
+            소요시간 = jobs[i][1]
+            요청시간 = jobs[i][0]
+            tmp = [소요시간, 요청시간, i]
             heapq.heappush(heap, tmp)
             i += 1
         
         if heap:
             popped = heapq.heappop(heap)
-            now += popped[0]
-            answer += now - popped[1]
-
+            time += popped[0]
+            answer += time - popped[1]
+        
         else:
-            now = jobs[i][0]
+            time = jobs[i][0]
         
     return answer // len(jobs)
