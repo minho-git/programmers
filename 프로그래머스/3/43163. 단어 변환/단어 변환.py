@@ -7,7 +7,6 @@ def solution(begin, target, words):
     
     q.append((begin, 0))
     
-    # 최소 몇 단계 -> bfs
     while q:
         
         popped = q.popleft()
@@ -17,15 +16,13 @@ def solution(begin, target, words):
         if a == target:
             return level
         
-        if level >= len(words):
-            return 0
         
         for i in range(len(visited)):
             
-            b = words[i]
-            
-            for j in range(len(words[i])):
-                if not visited[i]:
+            if not visited[i]:
+                b = words[i]
+
+                for j in range(len(words[i])):
                     if a[:j] == b[:j] and a[j+1:] == b[j+1:]:
                         q.append((b, level + 1))
                         visited[i] = True
