@@ -1,25 +1,20 @@
-def dfs(src, tickets, visited, result):
-
-    if len(result) == len(tickets) + 1:
-        return result
-
-    for index, ticket in enumerate(tickets):
-        if not visited[index] and ticket[0] == src:
-            visited[index] = True
-            des = ticket[1]
-            result.append(des)
-            
-            tmp = dfs(des, tickets, visited, result)
-            if tmp:
-                return tmp
-            
-            visited[index] = False
-            result.pop()
-            
-def solution(tickets):    
+def solution(tickets):
+    answer = []
     visited = [False] * len(tickets)
-    tickets.sort(key=lambda x : (x[0], x[1]))
     
-    answer = dfs("ICN", tickets, visited, ["ICN"])
+    def dfs(start, path): 
+        if (len(path) == len(tickets) + 1):
+            answer.append(path)
+            return
+        
+        for idx, ticket in enumerate(tickets):
+            if (ticket[0] == start) and (not visited[idx]):
+                visited[idx] = True
+                dfs(ticket[1], path + [ticket[1]])
+                visited[idx] = False
+                
+    dfs("ICN", ["ICN"])
 
-    return answer
+    answer.sort()
+    
+    return answer[0]
