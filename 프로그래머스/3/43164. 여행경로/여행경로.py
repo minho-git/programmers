@@ -1,20 +1,23 @@
 def solution(tickets):
-    answer = []
+    answer = 0
     visited = [False] * len(tickets)
+    tickets.sort()
     
-    def dfs(start, path): 
-        if (len(path) == len(tickets) + 1):
-            answer.append(path)
-            return
+    def dfs(start, result):
+        if len(result) == len(tickets) + 1:
+            return result
         
-        for idx, ticket in enumerate(tickets):
-            if (ticket[0] == start) and (not visited[idx]):
-                visited[idx] = True
-                dfs(ticket[1], path + [ticket[1]])
-                visited[idx] = False
+        for index, ticket in enumerate(tickets):
+            if not visited[index] and ticket[0] == start:
+                visited[index] = True
+                result.append(ticket[1])
+                tmp = dfs(ticket[1], result)
+                if tmp:
+                    return result
                 
-    dfs("ICN", ["ICN"])
-
-    answer.sort()
+                visited[index] = False
+                result.pop()
+                
+    answer = dfs("ICN", ["ICN"])
     
-    return answer[0]
+    return answer
