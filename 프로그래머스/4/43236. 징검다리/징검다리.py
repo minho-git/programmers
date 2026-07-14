@@ -3,34 +3,38 @@ def solution(distance, rocks, n):
     rocks.append(0)
     rocks.append(distance)
     rocks.sort()
-
-    
-    # 최댓값은 distance, 최솟값은 1
+   
+    # 거리의 최솟값을 줄여나가보자.
+    # 해당 거리일때 루프를 돌면서 바위를 몇개 제거해야하는지 체크
+    # 바위를 n개보다 많이 제거해야한다 -> 실패 -> end = mid - 1
+    # 바위를 n개보다 같거나 적게 제거했다 -> 성공 -> start = mid + 1
+    # 우리가 구할게 거리의 최솟값의 최댓값이므로
+    # 성공할때마다 최솟값의 최댓값을 구하자.
     start = 1
     end = distance
     
     while start <= end:
-        _min = distance
         mid = (start + end) // 2
+        count = 0
         
-        removed = 0
         prev = 0
-        # 돌의 간격이 mid 값보다 작으면 돌을 제거해야한다.
-        # 제거한 돌의 갯수가 n보다 작으면 탈락
-        # 제거한 돌의 갯수가 n보다 크거나 같으면 성공
+        
         for i in range(1, len(rocks)):
             tmp = rocks[i] - prev
-            _min = min(_min, tmp)
-            if tmp < mid:
-                removed += 1
+            
+            if tmp < mid: # 돌이 제거되야한다.
+                count += 1
             else:
                 prev = rocks[i]
-                
-        if removed <= n:
+        
+        if count <= n:
             start = mid + 1
             answer = max(answer, mid)
         else:
-            end = mid - 1
-            
+            end = mid -1
         
+                
+        
+    
+    
     return answer
