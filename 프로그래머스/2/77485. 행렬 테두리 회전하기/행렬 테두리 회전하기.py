@@ -35,9 +35,7 @@ def solution(rows, columns, queries):
             _min = min(graph[x1][y2-(y-y1)], graph[x2][y], _min)
             
         graph[x1][y1+1] = point_1
-        graph[x1+1][y2] = point_2
         graph[x2][y2-1] = point_3
-        graph[x2-1][y1] = point_4
         
         
         answer.append(_min)
