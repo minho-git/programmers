@@ -1,56 +1,58 @@
-def separate(string):
+def check(s):
+    stack = []
+    
+    for c in s:
+        if c == "(":
+            stack.append(c)
+        elif c == ")":
+            if not stack:
+                return False
+            elif stack[-1] == "(":
+                stack.pop()
+    
+    if not stack:
+        return True
+            
+    
+def seperate(s):
+    
+    if not s:
+        return ""
+    
     open_count = 0
     close_count = 0
-
-    for i in range(len(string)):
-        if string[i] == '(':
+    index = 0
+    v = ""
+    
+    for i in range(len(s)):
+        
+        if s[i] == "(":
             open_count += 1
         else:
             close_count += 1
-
+        
         if open_count == close_count:
-            return string[0 : i + 1], string[i + 1:]
+            index = i
+            break
+    
+    u = s[:index+1]
+    v = s[index+1:]
+    v = seperate(v)
+    
+    if check(u):
+        return u + v
+    else:
 
-def is_correct_string(string):
-    stack = []
-
-    for char in string:
-        if char == '(':
-            stack.append(char)
-        elif char == ')':
-            if len(stack) == 0:
-                return False
+        next = ""
+        for i in range(len(u)):
+            if u[i] == "(":
+                next += ")"
             else:
-                stack.pop()
+                next += "("
 
-    return len(stack) == 0
-
+        return "(" + v + ")" + next[1:-1]
+            
 
 def solution(balanced_parentheses_string):
-    if not balanced_parentheses_string:
-        return ""
-
-    (u, v) = separate(balanced_parentheses_string)
-
-    if is_correct_string(u):
-        v = solution(v)
-        u = u + v
-        return u
-    else:
-        empty_string = "("
-
-        empty_string += solution(v)
-
-        empty_string += ')'
-
-        u = u[1:-1]
-        tmp = ""
-        for i in range(len(u)):
-            if u[i] == '(':
-                tmp += ')'
-            else:
-                tmp += '('
-
-        empty_string += tmp
-
-        return empty_string
+    
+    return seperate(balanced_parentheses_string)
