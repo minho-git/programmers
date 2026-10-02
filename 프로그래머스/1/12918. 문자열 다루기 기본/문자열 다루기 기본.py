@@ -6,9 +6,7 @@ def solution(s):
         return False
     
     for c in s:
-        tmp = ord(c)
-        
-        if 48 > tmp or tmp > 57:
+        if not c.isdigit():
             return False
     
     
