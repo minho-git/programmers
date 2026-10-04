@@ -1,20 +1,19 @@
-from collections import Counter
-
 def solution(participant, completion):
-    tmp = {}
-    answer = ""
-
-    for a in participant:
-        tmp[a] = tmp.get(a, 0) + 1
+    _dict = dict()
     
-    
-    for b in completion:
-        if tmp.get(b) > 1:
-            tmp[b] = tmp[b] - 1
-        else:
-            del tmp[b]
-    
-    for key in tmp.keys():
-        answer = key
+    for p in participant:
+        _dict[p] = _dict.get(p, 0) + 1
         
+    
+    for c in completion:
+        if _dict.get(c, 1) == 1:
+            _dict.pop(c)
+        else:
+            _dict[c] = _dict[c] - 1
+    
+    
+    answer = list(_dict.keys())[0]
+            
+    
+    
     return answer
