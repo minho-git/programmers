@@ -1,56 +1,62 @@
 def solution(new_id):
     
-    # 1.
-    res1 = new_id.lower()
+    # 1단계
+    result_1 = new_id.lower()
     
-    # 2.
-    res2 = ""
-    for i in range(len(res1)):
-        tmp = res1[i]
-        if tmp.isalpha() or tmp.isdigit() or tmp in ("_", ".", "-"):
-            res2 += tmp
+    # 2단계
+    result_2 = []
+    for c in result_1:
+        if c.isalpha() or c.isdigit() or c in ["-", "_", "."]:
+            result_2.append(c)
+            
+    result_2 = "".join(result_2)
+    
+    # 3단계
+    tmp = result_2[0]
+    result_3 = [tmp]
+    for i in range(1, len(result_2)):
+        if tmp == "." and result_2[i] == ".":
+            pass
+        else:
+            result_3.append(result_2[i])
+            tmp = result_2[i]
 
-    # 3.
-    res3 = res2[0]
-    for i in range(1, len(res2)):
-        if res3[-1] != "." or res2[i] != ".":
-            res3 += res2[i]
+            
+    result_3 = "".join(result_3)
     
-    # 4.
-    if res3[0] == ".":
-        res3 = res3[1:]
+    # 4단계
+    result_4 = result_3
+    if result_4 and result_4[0] == '.':
+        result_4 = result_4[1:]
     
-    res4 = ""
-    if len(res3) > 0 and res3[-1] == ".":
-        res4 = res3[:-1]
-    else:
-        res4 = res3
-    
-    # 5.
-    res5 = ""
-    if res4 == "":
-        res5 = "a"
-    else:
-        res5 = res4  
-    
-    # 6.
-    res6 = ""
-    if len(res5) > 15:
-        res6 = res5[:15]
-    else:
-        res6 = res5
-    
-    if res6[-1] == ".":
-        res6 = res6[:-1]
-    
-    # 7.
-    res7 = ""
-    if len(res6) < 3:
-        res7 = res6
+    if result_4 and result_4[-1] == '.':
+        result_4 = result_4[:-1]
         
-        while len(res7) != 3:
-            res7 += res7[-1]
+    
+    # 5단계
+    result_5 = ""
+    if not result_4:
+        result_5 = "a"
     else:
-        res7 = res6
-
-    return res7
+        result_5 = result_4
+        
+    # 6단계
+    result_6 = ""
+    if len(result_5) >= 16:
+        result_6 = result_5[:15]
+        
+        if result_6[-1] == ".":
+            result_6 = result_6[:-1]
+    else:
+        result_6 = result_5
+        
+    
+    # 7단계
+    result_7 = result_6
+    if len(result_7) <= 2:
+        
+        while len(result_7) != 3:
+            result_7 += result_7[-1]
+            
+    return result_7
+  
