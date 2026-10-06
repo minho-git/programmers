@@ -34,15 +34,14 @@ def solution(survey, choices):
             continue
                  
         if c < 4:
-            지표들[_type][s[0]] += (8 - c) % 4
+            지표들[_type][s[0]] += (4 - c)
         else:
-            지표들[_type][s[1]] +=  c % 4
+            지표들[_type][s[1]] += (c - 4)
 
     
     for i in range(1, 5):
-         result.append(list(sorted(지표들[i].items(), key = lambda x : x[1], reverse=True)))
+         result.append(sorted(지표들[i].items(), key = lambda x : (-x[1], x[0])))
         
-    print(result)
     for t in result:
         answer+= t[0][0]
     
